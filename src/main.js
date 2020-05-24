@@ -1,8 +1,17 @@
-import Vue from "vue";
-import App from "./App.vue";
+import * as tComponents from "./components";
 
-Vue.config.productionTip = false;
+const install = Vue => {
+  // set default options
+  // Use Components
+  Object.values(tComponents).forEach(tComponent => {
+    Vue.use(tComponent);
+  });
+};
 
-new Vue({
-  render: h => h(App)
-}).$mount("#app");
+if (typeof window !== "undefined" && window.Vue) {
+  install(window.Vue);
+}
+
+export default install;
+
+export { default as tButton } from "./components/tButton";
